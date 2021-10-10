@@ -1,2 +1,6 @@
-# data-structures-fmi
-Repository for the seminars for the "Data Structures" course @fmi, Sofia University.
+# Семинар СДП, група 8
+
+## :books: Упражнения
+| № | Тема |
+| --- | --- |
+| 1. | Файлове - преговор. Анализ на алгоритми - преговор. Сортиране (част 1). |
