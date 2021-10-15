@@ -4,7 +4,9 @@
 ## I. Файлове
 
 **1. Йерархия на потоците в C++**
+
 &nbsp;
+
 ![Hierarchy of C++ stream classes](../media/sem01-stream-hierarchy.png)
 
 **2. Работа с файлове**
