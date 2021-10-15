@@ -51,7 +51,7 @@ void MergeSort(T* arr, int n)
     merge(arr, mid, arr+mid, (n-mid));
 } 
 
-// Updated version of partiotion
+// Updated version of partition
 // It uses one index instead of two to move from left to right of the array
 template <typename T>
 int partition(T* arr, int n)
