@@ -22,11 +22,14 @@ private:
 
     void copy(const LinkedStack<T>& other);
     void free();
+    void nullify();
 
 public:
     LinkedStack();
     LinkedStack(const LinkedStack<T>& other);
+    LinkedStack(LinkedStack<T>&& other) noexcept;
     LinkedStack<T>& operator=(const LinkedStack<T>& other);
+    LinkedStack<T>& operator=(LinkedStack<T>&& other) noexcept;
     ~LinkedStack();
 
     void push(const T& element);
@@ -82,12 +85,26 @@ void LinkedStack<T>::free()
 }
 
 template <typename T>
+void LinkedStack<T>::nullify()
+{
+    head = nullptr;
+    size = 0;
+}
+
+template <typename T>
 LinkedStack<T>::LinkedStack() : size(0), head(nullptr) {}
 
 template <typename T>
 LinkedStack<T>::LinkedStack(const LinkedStack<T>& other)
 {
     copy(other);
+}
+
+template <typename T>
+LinkedStack<T>::LinkedStack(LinkedStack<T>&& rhs) noexcept
+    : size(std::move(rhs.size)), head(std::move(rhs.head))
+{
+    rhs.nullify();
 }
 
 template <typename T>
@@ -98,6 +115,19 @@ LinkedStack<T>& LinkedStack<T>::operator=(const LinkedStack<T>& other)
         free();
         copy(other);
     }
+    return *this;
+}
+
+template <typename T>
+LinkedStack<T>& LinkedStack<T>::operator=(LinkedStack<T>&& other) noexcept
+{
+    // assert(this != &other);
+
+    free();
+    this->head = std::move(other.head);
+    this->size = std::move(other.size);
+    other.nullify();
+    
     return *this;
 }
 
@@ -158,7 +188,6 @@ template <typename T>
 int LinkedStack<T>::getSize() const
 {
     return size; // O(1)
-
     
     // Ако нямаме член-данна size,
     // то сложността на метода ще е линейна.
